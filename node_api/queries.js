@@ -1,7 +1,7 @@
-// import pool to use it quering the database
-// connect the apis with the database by creating a pool
+// import pool to use it for quering the database
+// connect to the database so you can perform the CRUD actions using (const pool = new Pool({databasedetails}))
 // create functions to enable users from client side interact with the apis via CRUD
-// export the functions by creating an object of function
+// export the functions by creating an object of function using (module.exports = { functions})
 
 // 1. import the poll
 const Pool = require('pg').Pool
@@ -86,6 +86,7 @@ const deleteUser = (request, response) => {
   })
 }
 
+// export the function so you can use then in the index.js file
 module.exports = {
   getUsers,
   getUserById,

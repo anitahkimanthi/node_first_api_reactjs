@@ -3,16 +3,16 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const app = express()
 const port = 5454
-// const LogRocket = require("logrocket");
 
-// LogRocket.init('or75mo/node_first_api');
-
+// register the body parser middleware
 app.use(bodyParser.json())
 app.use(
   bodyParser.urlencoded({
     extended: true
   })
 )
+
+// all cors
 app.use(function(req, res, next) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
@@ -21,12 +21,16 @@ app.use(function(req, res, next) {
   next();
 });  
 
+
+// Routes for all the CRUD functions
+// http request method (GET, PUT, POST AND DELETE), route url(/users), etc, function (db.function)
 app.get('/users', db.getUsers)
 app.get('/users/:id', db.getUserById)
 app.post('/users', db.createUser)
 app.put('/users/:id', db.updateUser)
 app.delete('/users/:id', db.deleteUser)
 
+// listen at which port is the app running at
 app.listen(port, () => {
     console.log(`app running at ${port}`)
   })
