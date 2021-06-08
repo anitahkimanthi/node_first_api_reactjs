@@ -27,7 +27,7 @@ Now run; `psql -d postgres -U username`.
 Now instead of `postgres=# ` you'll be prompt with `postgres=>` meaning you are no longer logged in as a superuser but as user you just created.
 
 Run: `CREATE DATABASE databasename;` to create the database.
-To view the database run; `postgres=> \list`. For more postgreSQL commands see [https://www.postgresqltutorial.com/psql-commands/](https://www.postgresqltutorial.com/psql-commands/).
+To view the database run; `postgres=> \list`. Check more postgreSQL commands [here](https://www.postgresqltutorial.com/psql-commands/).
 
 #### Switching to the database you created
 Type: `\c databasename` to connect to the database. Now you'll be prompt with `databasename=>` instead of `postgres=>` and now you can interact with the database by either creating tables, inserting data in the tables, etc
