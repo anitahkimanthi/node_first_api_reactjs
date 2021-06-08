@@ -38,7 +38,7 @@ On `database=>` type: ` CREATE TABLE tablename (ID SERIAL PRIMARY KEY, username 
 The above command will create a table by which users will be required to post the data with the fields indicated in the table `username, email, phone_number, age, gender, password`. `NOT NULL` constraint is used to reject all the null fields during post.
 
 #### Inserting users using terminal
-Type; ` INSERT INTO tablename (username, email, phone_number, age, gender, password) VALUES('John','john@gmail.com','+254717984562','30','Male','password',);`. Now the user will be added into the table and you can retrive the users inserted using `GET` request On the client-side or use `SELECT * FROM tablename` on the terminal -  `connected database terminal`.
+Type; ` INSERT INTO tablename (username, email, phone_number, age, gender, password) VALUES('John','john@gmail.com','+254717984562','30','Male','password',);`. Now the user will be added into the table and you can retrive the users inserted using `GET` request On the client-side or use `SELECT * FROM tablename` on the terminal.
 
 #### Setting up Node.js and Express.js server
 ##### creating the project folder
