@@ -4,8 +4,9 @@ const bodyParser = require('body-parser')
 const app = express()
 const port = 5454
 
-// register the body parser middleware
+// register the body parser middleware or any other middlewares here
 app.use(bodyParser.json())
+
 app.use(
   bodyParser.urlencoded({
     extended: true
@@ -21,9 +22,9 @@ app.use(function(req, res, next) {
   next();
 });  
 
-
+// handling GET HTTP requests
 // Routes for all the CRUD functions
-// http request method (GET, PUT, POST AND DELETE), route url(/users), etc, function (db.function)
+// http request methods (GET, PUT, POST AND DELETE), route url(/users), etc, function (db.function)
 app.get('/users', db.getUsers)
 app.get('/users/:id', db.getUserById)
 app.post('/users', db.createUser)
