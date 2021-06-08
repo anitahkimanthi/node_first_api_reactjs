@@ -33,12 +33,12 @@ To view the database run; `postgres=> \list`. Check more postgreSQL commands [he
 Type: `\c databasename` to connect to the database. Now you'll be prompt with `databasename=>` instead of `postgres=>` and now you can interact with the database by either creating tables, inserting data in the tables, etc
 
 #### Creating tables
-On `database=>` type: ```js: CREATE TABLE tablename (ID SERIAL PRIMARY KEY, username VARCHAR(50) NOT NULL, email VARCHAR(200) NOT NULL, phone_number VARCHAR(50) NOT NULL, age INT CHECK(age > 0) NOT NULL, gender VARCHAR(20) NOT NULL, password VARCHAR(100) NOT NULL, created_date TIMESTAMP NOW(), modified_date TIMESTAMP NOW()```;
+On `database=>` type: ```js, CREATE TABLE tablename (ID SERIAL PRIMARY KEY, username VARCHAR(50) NOT NULL, email VARCHAR(200) NOT NULL, phone_number VARCHAR(50) NOT NULL, age INT CHECK(age > 0) NOT NULL, gender VARCHAR(20) NOT NULL, password VARCHAR(100) NOT NULL, created_date TIMESTAMP NOW(), modified_date TIMESTAMP NOW()```;
 
 The above command will create a table by which users will be required to post the data with the fields indicated in the table `username, email, phone_number, age, gender, password`. `NOT NULL` constraint is used to reject all the null fields during post.
 
 #### Inserting users using terminal
-Type; ```js: INSERT INTO tablename (username, email, phone_number, age, gender, password) VALUES('John','john@gmail.com','+254717984562','30','Male','password',);```. Now the user will be added into the table and you can retrive the users inserted using `GET` request On the client-side or use `SELECT * FROM tablename` on the terminal -  `connected database terminal`.
+Type; ```js, INSERT INTO tablename (username, email, phone_number, age, gender, password) VALUES('John','john@gmail.com','+254717984562','30','Male','password',);```. Now the user will be added into the table and you can retrive the users inserted using `GET` request On the client-side or use `SELECT * FROM tablename` on the terminal -  `connected database terminal`.
 
 #### Setting up Node.js and Express.js server
 ##### creating the project folder
@@ -53,13 +53,13 @@ Run: `yarn add experess pg`
 ##### creating project required files
 Create `index.js` file using: `touch index.js` or do it manually by opeing your preferred text editor and create `index.js` file and save. 
 
-This file will be used as the entry point to the server. It will require `express` - ```js: const express = require('express')```, `db` - ```const db = require('./queries')``` to be created. `port` number eg; `5000` - ```js: const port = 5000```, `bodyParser` middleware  - ```js: const bodyParser = require('body-parser')```, responsible for parsing the incoming request bodies in a middleware before you handle it and  `app` - ```js: const app = express()```.
+This file will be used as the entry point to the server. It will require `express` - ```js, const express = require('express')```, `db` - ```js, const db = require('./queries')``` to be created. `port` number eg; `5000` - ```js, const port = 5000```, `bodyParser` middleware  - ```js, const bodyParser = require('body-parser')```, responsible for parsing the incoming request bodies in a middleware before you handle it and  app - ```js, const app = express()```.
 
-After adding the above constants now register the bodyParser middleware ```js: app.use(bodyParser.json())``` and ```js: app.use(bodyParser.urlencoded({ extended: true}))```.
+After adding the above constants now register the bodyParser middleware ```js, app.use(bodyParser.json())``` and ```js, app.use(bodyParser.urlencoded({ extended: true}))```.
 
-After registering bodyParser middleware now, handle the HTTP requests. formart: `method (GET,POST,PUT and DELETE)`, `Route url` and the `function(eg; getUsers)`. So, you'll use ```js: app.get('/url', db.function)```.
+After registering bodyParser middleware now, handle the HTTP requests. formart: `method (GET,POST,PUT and DELETE)`, `Route url` and the `function(eg; getUsers)`. So, you'll use ```js, app.get('/url', db.function)```.
 
-Create `queries.js` file to use in creating all the CRUD functions `GET, POST, PUT DELETE`, require pool - ```js: const Pool = require(pg).Pool``` used in connecting to database ```js: const pool = new Pool({all the database details - port, user, database, password})``` for database specifications, quering the database `pool.query(actions)` and exporting the functions- ```js: module.exports = {all the functions created}```.
+Create `queries.js` file to use in creating all the CRUD functions `GET, POST, PUT DELETE`, require pool - ```js, const Pool = require(pg).Pool``` used in connecting to database ```js, const pool = new Pool({all the database details - port, user, database, password})``` for database specifications, quering the database `pool.query(actions)` and exporting the functions- ```js, module.exports = {all the functions created}```.
 
 
 
