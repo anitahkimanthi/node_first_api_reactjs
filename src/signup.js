@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { useState } from 'react'
-import './App.css'
+import url from './base'
 
 function Signup () {
   const [state, setState] = useState({
@@ -9,7 +9,7 @@ function Signup () {
     email: '',
     phone_number: '',
     password: '',
-    gender: ''
+    gender: 'male'
   })
 
   const handleChange = e => {
@@ -18,7 +18,6 @@ function Signup () {
       ...state,
       [name]: value
     })
-    console.log(value)
   }
 
   const handleGender = e => {
@@ -27,43 +26,40 @@ function Signup () {
       ...state,
       gender: value
     })
-
-    console.log(value)
   }
 
   const handleSubmit = e => {
     e.preventDefault()
 
-    const { username, email, phone_number, age, gender, pasword } = state
+    const { username, email, phone_number, age, gender, password } = state
     // submit data to server
-    const data = {
-      username,
-      email,
-      phone_number,
-      age,
-      gender,
-      pasword
-    }
-
-    const url = 'https://localhost/5454/users'
-    const body = JSON.stringify({
-      data
+    const data = JSON.stringify({
+      username: username,
+      email: email,
+      phone_number: phone_number,
+      age: age,
+      gender: gender,
+      password: password
     })
 
-    axios.post(url, {
-      body: body,
-    })
+    console.log(data)
+
+    axios
+      .post(`${url}/register`, data)
       .then(response => {
-        console.log(response)
+        console.log(response.status)
       })
-      .catch(error => console.log(error))
+      .catch(error => {})
   }
 
   const gender = ['male', 'female']
 
   return (
-    <div className='app'>
+    <div className='signup'>
       <form onSubmit={handleSubmit}>
+        <h2>
+          <b>REGISTER</b>
+        </h2>
         <input
           type='text'
           name='username'
@@ -94,20 +90,28 @@ function Signup () {
         />
         <select>
           {gender.map((g, i) => (
-            <option value={g} onClick={handleGender} key={i}>
+            <option value={g} onClick={handleGender} id={g} key={i}>
               {g}
             </option>
           ))}
         </select>
         <input
-          type='pasword'
+          type='password'
           name='password'
           value={state.password}
           placeholder='Enter password'
           onChange={handleChange}
         />
-
-        <button>Signup</button>
+        {state.username === '' ||
+        state.email === '' ||
+        state.phone_number === '' ||
+        state.age === '' ||
+        gender === '' ||
+        state.password === '' ? (
+          <button disabled>Signup</button>
+        ) : (
+          <button>Signup</button>
+        )}
       </form>
     </div>
   )

@@ -59,10 +59,11 @@ const updateUser = (request, response) => {
 
 // create new user
 const createUser = (request, response) => {
-  const { username, email, phone_number, age, gender } = request.body
+  const { username,email,phone_number,age,gender,password } = request.body
+
   pool.query(
-    'INSERT INTO users (username, email,phone_number,age,gender) VALUES($1, $2,$3,$4,$5,$6)',
-    [username, email, phone_number, age, gender],
+    'INSERT INTO users (username,email,phone_number,age,gender,password) VALUES($1, $2,$3,$4,$5, $6) RETURNING *',
+    [username, email, phone_number, age, gender, password],
     (error, results) => {
       if (error) {
         throw error

@@ -1,29 +1,47 @@
+/* main app general styles */
 .app{
   height: 100vh;
+  background-color: #ccc;
+  box-sizing: border-box;
 }
 
+/* media quesries for all the components */
 @media only screen and (max-width:600px){
 .app form{
   width: 100%
 }
+
+}
+@media only screen and (min-width:600px){
+  .app form{
+    width: 50%
+  }
 }
 
+/* forms styles */
 .app form{
-  width: 50%;
   box-sizing: border-box;
   padding: 20px;
   margin: 0 auto
 }
+form h2{
+  text-align: center;
+}
 
-.app input{
+.signup input{
 display: block;
 width: 100%;
+padding: 10px;
+box-sizing: border-box;
 margin: 10px 0
 }
-.app select{
+.signup select{
   width: 100%;
+  padding: 10px;
   margin: 10px 0
 }
+
+/* all buttons style */
 button{
   background-color: maroon;
   width: 100%;
@@ -33,3 +51,35 @@ button{
   border: none;
   margin: 10px 0
 }
+
+/* user component styles */
+ .users{
+  display: flex;
+  box-sizing: border-box;
+  margin: 0 auto;
+  padding-top: 4%;
+}
+
+ .users ul{
+  background-color: #ffffff;
+  margin: 1%;
+  width: 24%;
+  padding : 2%;
+  box-sizing: border-box;
+}
+.users span{
+  color: rgb(122, 122, 122)
+}
+.users ul li {
+  display: flex;
+}
+.users b{
+  margin-right: 20px;
+}
+
+/* all ul and li sytles */
+.app ul li{
+  list-style: none;
+  box-sizing: border-box;
+}
+
