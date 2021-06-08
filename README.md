@@ -4,7 +4,7 @@ The project was created with [Create React App](https://github.com/facebook/crea
 
 ## Set up
 
-To get started, clone the project in your local maching, copy `git clone https://github.com/anitahkimanthi/node_first_api_reactjs.git` and paste on the terminal or `Download Zip`file in the clone section in this repository.
+To get started, clone the project in your local machine, copy `git clone https://github.com/anitahkimanthi/node_first_api_reactjs.git` and paste on the terminal or `Download Zip`file in the clone section in this repository.
 
 When the project is done cloning, `yarn install` to install the packages.
 
