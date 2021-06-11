@@ -1,5 +1,4 @@
-import { Router, Switch } from 'react-router'
-import { Route } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { createBrowserHistory } from 'history'
 import './App.css'
 import Login from './login'
@@ -16,6 +15,7 @@ function App () {
       <Router history={history}>
         <Switch>
           <Route exact path='/' component={Signup} />
+          <Route exact path='/signup' component={Signup} />
           <Route path='/login' component={Login} />
           <Route path='/user/:id' component={EditUser} />
           <Route path='/users' component={Users} />

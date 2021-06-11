@@ -15,7 +15,6 @@ function EditUser (props) {
   const location = useLocation()
 
   useEffect(() => {
-    console.log(props.history)
     getUserById()
   }, [])
 
@@ -26,12 +25,15 @@ function EditUser (props) {
 
     axios.get(`${url}/users/${id}`).then(response => {
       const data = response.data
-      setState({
-        username: data.username,
-        email: data.email,
-        phone_number: data.phone_number,
-        age: data.age
-      })
+      console.log(response.data)
+      const userdetail = data.map(u =>
+        setState({
+          username: u.username,
+          email: u.email,
+          phone_number: u.phone_number,
+          age: u.age
+        })
+      )
     })
   }
   // edit user data function
