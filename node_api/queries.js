@@ -10,7 +10,7 @@ const Pool = require('pg').Pool
 const pool = new Pool({
   host: 'localhost',
   user: 'anitah',
-  database: 'firstapis',
+  database: 'first_database',
   password: 'hanny@blsliz5',
   port: 5432
 })
@@ -60,17 +60,29 @@ const updateUser = (request, response) => {
 // create new user
 const createUser = (request, response) => {
   const { username,email,phone_number,age,gender,password } = request.body
+  const createTable = `CREATE TABLE IF NOT EXISTS users (
+    ID SERIAL PRIMARY KEY,
+    username VARCHAR(100) NOT NULL UNIQUE,
+    email VARCHAR(120) NOT NULL UNIQUE,
+    phone_number VARCHAR(40) NOT NULL UNIQUE,
+    age INT CHECK(age > 0) NOT NULL,
+    gender VARCHAR(20) NOT NULL,
+    password VARCHAR(100) NOT NULL,
+    created_date TIMESTAMP NOT NULL DEFAULT NOW(),
+    modified_date TIMESTAMP NOT NULL DEFAULT NOW(),
+  )`;
 
   pool.query(
     'INSERT INTO users (username,email,phone_number,age,gender,password) VALUES($1, $2,$3,$4,$5, $6) RETURNING *',
-    [username, email, phone_number, age, gender, password],
+    [username,email,phone_number,age,gender,password],
     (error, results) => {
       if (error) {
         throw error
       }
+      console.log(response.status())
       response
         .status(200)
-        .send(`User with id ${results.id} was created successifully`)
+        .send(results.rows[0], "ACcount created successifully")
     }
   )
 }

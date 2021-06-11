@@ -1,16 +1,19 @@
-const bodyParser = require('body-parser')
 const db = require('./queries')
+const bodyParser = require('body-parser')
 const express = require('express')
 const app = express()
 const port = 5454
 
 // register the body parser middleware or any other middlewares here
-app.use(bodyParser.json())
+// parse application/x-www-form-urlencoded
 app.use(
   bodyParser.urlencoded({
     extended: true
   })
 )
+
+// parse application/json
+app.use(bodyParser.json())
 
 // all cors
 app.use(function(req, res, next) {
