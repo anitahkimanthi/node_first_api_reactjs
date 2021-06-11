@@ -23,7 +23,7 @@ function Signup () {
   }
 
   const handleGender = e => {
-    const {value} = e.target
+    const { value } = e.target
     setState({
       ...state,
       gender: value
@@ -45,7 +45,13 @@ function Signup () {
     }
 
     axios
-      .post(`${url}/register`, data)
+      .post(`${url}/register`, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        // body: JSON.stringify(data),
+        body : data
+      })
       .then(response => {
         console.log(response)
         if (response.status === 200) {
@@ -58,18 +64,18 @@ function Signup () {
       })
       .catch(error => {})
 
-    setState({
-      username: '',
-      age: '',
-      email: '',
-      phone_number: '',
-      password: '',
-      gender: ''
-    })
+    // setState({
+    //   username: '',
+    //   age: '',
+    //   email: '',
+    //   phone_number: '',
+    //   password: '',
+    //   gender: ''
+    // })
   }
 
   const gender = ['male', 'female']
- 
+
   return (
     <div className='auth col-12 col-sm-11 col-md-10 col-lg-6 col-xl-4'>
       <form onSubmit={handleSubmit}>
@@ -106,7 +112,7 @@ function Signup () {
         />
         <select onClick={handleGender}>
           {gender.map((g, i) => (
-            <option value={g}  key={i}>
+            <option value={g} key={i}>
               {g}
             </option>
           ))}

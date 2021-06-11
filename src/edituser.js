@@ -10,9 +10,12 @@ function EditUser (props) {
     email: '',
     phone_number: '',
     age: '',
+    gender: '',
     successMsg: ''
   })
   const location = useLocation()
+  const userId = location.state.id
+  console.log(userId)
 
   useEffect(() => {
     getUserById()
@@ -20,21 +23,22 @@ function EditUser (props) {
 
   // get user by id function
   const getUserById = () => {
-    const id = location.state.id
-    console.log(id)
-
-    axios.get(`${url}/users/${id}`).then(response => {
-      const data = response.data
-      console.log(response.data)
-      const userdetail = data.map(u =>
+    axios
+      .get(`${url}/users/${userId}`)
+      .then(response => {
+        const data = response.data
+        console.log(response.data)
         setState({
-          username: u.username,
-          email: u.email,
-          phone_number: u.phone_number,
-          age: u.age
+          username: data.username,
+          email: data.email,
+          phone_number: data.phone_number,
+          age: data.age,
+          gender: data.gender
         })
-      )
-    })
+      })
+      .catch(error => {
+        console.log(error)
+      })
   }
   // edit user data function
   const handleChange = e => {
@@ -47,24 +51,28 @@ function EditUser (props) {
 
   const editUser = e => {
     e.preventDefault()
-    const id = props.location.state.id
-
-    const { username, email, phone_number, age } = state
+    const { username, email, phone_number, age, gender } = state
     // submit data to server
     const data = {
       username: username,
       email: email,
       phone_number: phone_number,
-      age: age
+      age: age,
+      gender: gender,
+      id: userId
     }
 
     axios
-      .update(`${url}/users/${id}`, data)
+      .put(`${url}/users/${userId}`, { 
+        body: data 
+      })
       .then(response => {
+        console.log(response)
         if (response.status === 200) {
           setState({
             successMsg: 'User updated successifully'
           })
+
           getUserById()
         } else {
           console.log(response.status)

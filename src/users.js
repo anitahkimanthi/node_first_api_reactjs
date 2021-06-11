@@ -13,13 +13,13 @@ function Users (props) {
       .get(`${url}/users`)
       .then(res => {
         setUsers(res.data)
-      })
+      }
+      )
       .catch(error => {
-        console.log(error)
+        
       })
   }
   useEffect(() => {
-    console.log(props.history)
     getUsers()
   }, [])
 
@@ -34,9 +34,9 @@ function Users (props) {
   }
 
   // redirect user to edit page on click edit user button
-  const redirect = id => {
+  const redirect = (name, id) => {
     history.push({
-      pathname: `/user/${id}`,
+      pathname: `/user/${name}`,
       state: { id: id }
     })
   }
@@ -72,7 +72,7 @@ function Users (props) {
                   </button>
                 </div>
                 <div className='col-12 col-md-6'>
-                  <button onClick={e => redirect(user.id)}>EDIT USER</button>
+                  <button onClick={e => redirect(user.username, user.id)}>EDIT USER</button>
                 </div>
               </div>
             </div>
