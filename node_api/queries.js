@@ -15,6 +15,20 @@ const pool = new Pool({
   port: 5432
 })
 
+// create users table
+const createDatabase = () => {
+  const text = `CREATE TABLE users`
+
+  new Promise(function (resolve, reject) {
+    pool.query(text, (error, results) => {
+      if (error) {
+        reject(error)
+      }
+      resolve('database created successifully')
+    })
+  })
+}
+
 // 3. interact with the database from client sside
 // get all users function
 
@@ -62,8 +76,9 @@ const updateUser = (body, id) => {
 const createUser = body => {
   return new Promise(function (resolve, reject) {
     const { username, email, phone_number, age, gender, password } = body.body
+
     const createTable = `CREATE TABLE IF NOT EXISTS users (
-    ID SERIAL PRIMARY KEY,
+    id UUID PRIMARY KEY UNIQUE NOT NULL,
     username VARCHAR(100) NOT NULL UNIQUE,
     email VARCHAR(120) NOT NULL UNIQUE,
     phone_number VARCHAR(40) NOT NULL UNIQUE,
@@ -73,7 +88,6 @@ const createUser = body => {
     created_date TIMESTAMP NOT NULL DEFAULT NOW(),
     modified_date TIMESTAMP NOT NULL DEFAULT NOW(),
   )`
-
     pool.query(
       'INSERT INTO users (username,email,phone_number,age,gender,password) VALUES($1, $2,$3,$4,$5, $6) RETURNING *',
       [username, email, phone_number, age, gender, password],
@@ -88,7 +102,7 @@ const createUser = body => {
 }
 
 // delete a user
-const deleteUser = (id) => {
+const deleteUser = id => {
   return new Promise(function (resolve, reject) {
     console.log(id)
     pool.query('DELETE FROM users WHERE id=$1', [id], (error, results) => {
@@ -102,6 +116,7 @@ const deleteUser = (id) => {
 
 // export the function so you can use then in the index.js file
 module.exports = {
+  createDatabase,
   getUsers,
   getUserById,
   createUser,

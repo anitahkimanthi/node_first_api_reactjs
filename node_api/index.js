@@ -1,6 +1,5 @@
 const db = require('./queries')
 const express = require('express')
-const { response } = require('express')
 const app = express()
 const port = 5454
 
@@ -48,7 +47,6 @@ app.get('/users/:id', (req, res) => {
 })
 
 app.post('/register', (req, res) => {
-  console.log(res.status())
   db.createUser(req.body)
     .then(response => {
       console.log(res)
